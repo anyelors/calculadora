@@ -6,7 +6,6 @@ function Calculadora() {
   const [textoInput, setTextoInput] = useState('');
   const [inputUno, setInputUno] = useState('');
   const [signo, setSigno] = useState('');
-  const [resultado, setResultado] = useState('');
 
   const manejarClick = (tecla) => {
     setTextoInput(prev => prev + tecla);
@@ -32,7 +31,6 @@ function Calculadora() {
     console.log(vNum2);
 
     if (isNaN(vNum1) || isNaN(vNum2)) {
-      setResultado("Por favor, ingrese un número.");
       setTextoInput('');
       setInputUno('');
       setSigno('');
@@ -40,7 +38,6 @@ function Calculadora() {
     }
 
     if (vNum2 === 0 && signo === 'division') {
-      setResultado("No se puede dividir entre cero.");
       setTextoInput('');
       setInputUno('');
       setSigno('');
@@ -64,8 +61,7 @@ function Calculadora() {
         result = 0;
     }
 
-    setResultado(result);
-    setTextoInput('');
+    setTextoInput(result.toString());
     setInputUno('');
     setSigno('');
   };
@@ -118,23 +114,18 @@ function Calculadora() {
         </button>
         <button
           className="tecla"
-          onClick={borrarUltima}
+          onClick={() => borrarUltima()}
         >
           🔙
         </button>
         <button
           className="tecla"
-          onClick={getResultado}
+          onClick={() => getResultado()}
         >
           🟰
         </button>
       </div>
 
-      {resultado && (
-        <div className="display">
-          <strong>Resultado: {resultado}</strong>
-        </div>
-      )}
     </div>
   );
 }
